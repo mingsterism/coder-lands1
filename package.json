@@ -1,0 +1,30 @@
+{
+  "name": "coder-lands1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "react",
+    "javascript",
+    "maps"
+  ],
+  "author": "mingsterism",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "isomorphic-unfetch": "^2.0.0",
+    "next": "^3.2.1",
+    "next-routes": "^1.0.40",
+    "randomstring": "^1.1.5",
+    "react": "^15.6.1",
+    "react-async-script-loader": "^0.3.0",
+    "react-dom": "^15.6.1",
+    "request": "^2.81.0",
+    "styled-components": "^2.1.2"
+  }
+}
