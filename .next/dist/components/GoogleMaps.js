@@ -34,10 +34,12 @@ var _reactAsyncScriptLoader2 = _interopRequireDefault(_reactAsyncScriptLoader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = 'C:\\Users\\mingk\\coding1\\fullstack\\projects\\coder-lands1\\components\\GoogleMaps.js';
+var _jsxFileName = '/home/ubuntu/coder-lands1/components/GoogleMaps.js';
 
+var fs = require('fs');
 
-var API_KEY = 'AIzaSyA0lNuI8pwpbEgsDZbmuIlSLfY7GB1GyMM';
+var keys = JSON.parse(fs.readFileSync('./keys.txt', 'utf8'));
+var API_KEY = keys['GoogleAPIKEY'];
 var MAPSTYLE = {
   height: "100vh",
   width: "100%",
@@ -64,7 +66,7 @@ var NewComponent = function (_React$Component) {
       if (this.props.isScriptLoaded && !this.variable) {
         this.loadMap();
       }
-      console.log("Did mount -----------");
+      console.log("FRONTEND Did mount -----------");
       console.log(this.props.isScriptLoaded);
       console.log(this.props.isScriptLoadSucceed);
     }
@@ -74,7 +76,7 @@ var NewComponent = function (_React$Component) {
       if (this.props.isScriptLoaded && !this.variable) {
         this.loadMap();
       }
-      console.log("Did update -----------");
+      console.log("FRONTEND Did update -----------");
       console.log(this.props.isScriptLoaded);
       console.log(this.props.isScriptLoadSucceed);
     }
@@ -85,8 +87,8 @@ var NewComponent = function (_React$Component) {
 
       this.variableX = true;
       this.map = new window.google.maps.Map(this.refs.map, {
-        center: { lat: 10.794234, lng: 106.706341 },
-        zoom: 15
+        center: { lat: 3.1328, lng: 101.629 },
+        zoom: 4
       });
 
       if (navigator.geolocation) {
@@ -105,11 +107,33 @@ var NewComponent = function (_React$Component) {
             title: 'Hello World!'
           });
         }, function () {
-          console.log('navigator disabled');
+          console.log('navigator disabled -----');
+          var pos = {
+            lat: 3.14,
+            lng: 101.3
+          };
+          var marker = new window.google.maps.Marker({
+            position: pos,
+            map: _this2.map,
+            title: "Hello map"
+          });
+          console.log("$$$$$$$$: ", marker);
+          marker.setMap(_this2.map);
         });
       } else {
         // Browser doesn't support Geolocation
         console.log('navigator disabled');
+        var pos = {
+          lat: 3.14,
+          lng: 101.3
+        };
+        var marker = new window.google.maps.Marker({
+          position: pos,
+          map: this.map,
+          title: "Hello map"
+        });
+        console.log("$$$$$$$$: ", marker);
+        marker.setMap(map);
       }
     }
   }, {
@@ -119,15 +143,15 @@ var NewComponent = function (_React$Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 70
+          lineNumber: 94
         }
       }, _react2.default.createElement('div', { ref: 'map', style: MAPSTYLE, __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 95
         }
       }), !this.map && _react2.default.createElement('div', { className: 'center-md', __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 96
         }
       }, 'Loading...'));
     }
@@ -136,107 +160,5 @@ var NewComponent = function (_React$Component) {
   return NewComponent;
 }(_react2.default.Component);
 
-// class GoogleMaps extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.map = null; 
-
-//     this.__isScriptLoad = false;
-//   }
-
-//   componentWillReceiveProp () {
-//     const { isScriptLoaded, isScriptLoadSucceed } = this.props;
-//     console.log(isScriptLoaded, isScriptLoadSucceed)
-//     document.body.style.margin = 0
-//     if (isScriptLoaded && !this.__isScriptLoad) { // load finished
-//       console.log("Script is loadaed...")
-//       this.__isScriptLoad = true;
-//       if (isScriptLoadSucceed) {
-//         this.map = new window.google.maps.Map(this.refs.map, {
-//           center: {lat: 10.794234, lng: 106.706341},
-//           zoom: 15
-//         });
-
-//         if (navigator.geolocation) {
-//           console.log("Navigator geolocation: ", navigator.geolocation)
-//           navigator.geolocation.getCurrentPosition((position) => {
-//             const pos = {
-//               lat: position.coords.latitude,
-//               lng: position.coords.longitude
-//             };
-
-//             this.map.setCenter(pos);
-
-//             const marker = new window.google.maps.Marker({
-//               position: pos,
-//               map: this.map,
-//               title: 'Hello World!'
-//             });                
-//           }, () => {
-//             console.log('navigator disabled');
-//           });
-//         } else {
-//           // Browser doesn't support Geolocation
-//           console.log('navigator disabled');
-//         }
-//       }
-//       else this.props.onError()
-//     }
-//   }
-//   componentWillUnmount () {
-//       document.body.style.margin = 8;
-//   }
-
-// componentDidUpadate ({ isScriptLoaded, isScriptLoadSucceed }) {
-//   console.log("COmponent did update !!!!")
-//   return 
-//   console.log("+++++++++++++++++++++++++++")
-//   if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
-//     console.log("Script is loadaed...")
-//     if (isScriptLoadSucceed) {
-//       this.map = new window.google.maps.Map(this.refs.map, {
-//         center: {lat: 10.794234, lng: 106.706341},
-//         zoom: 15
-//       });
-
-//       if (navigator.geolocation) {
-//         console.log("Navigator geolocation: ", navigator.geolocation)
-//         navigator.geolocation.getCurrentPosition((position) => {
-//           const pos = {
-//             lat: position.coords.latitude,
-//             lng: position.coords.longitude
-//           };
-
-//           this.map.setCenter(pos);
-
-//           const marker = new window.google.maps.Marker({
-//             position: pos,
-//             map: this.map,
-//             title: 'Hello World!'
-//           });                
-//         }, () => {
-//           console.log('navigator disabled');
-//         });
-//       } else {
-//         // Browser doesn't support Geolocation
-//         console.log('navigator disabled');
-//       }
-//     }
-//     else this.props.onError()
-//   }
-// }
-
-//   render(){
-//     // console.log('Rendering herer from client ========================')
-//     return (    
-//       <div>
-//         <div ref="map" style={ MAPSTYLE }></div>
-//         { !this.map && <div className="center-md">Loading...</div> } 
-//       </div>
-//     )
-//   }
-// }
-
-
 exports.default = (0, _reactAsyncScriptLoader2.default)(['https://maps.googleapis.com/maps/api/js?key=' + API_KEY])(NewComponent);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHNcXEdvb2dsZU1hcHMuanMiXSwibmFtZXMiOlsiUmVhY3QiLCJzY3JpcHRMb2FkZXIiLCJBUElfS0VZIiwiTUFQU1RZTEUiLCJoZWlnaHQiLCJ3aWR0aCIsInBhZGRpbmciLCJtYXJnaW4iLCJOZXdDb21wb25lbnQiLCJwcm9wcyIsIm1hcCIsInZhcmlhYmxlWCIsImlzU2NyaXB0TG9hZGVkIiwidmFyaWFibGUiLCJsb2FkTWFwIiwiY29uc29sZSIsImxvZyIsImlzU2NyaXB0TG9hZFN1Y2NlZWQiLCJ3aW5kb3ciLCJnb29nbGUiLCJtYXBzIiwiTWFwIiwicmVmcyIsImNlbnRlciIsImxhdCIsImxuZyIsInpvb20iLCJuYXZpZ2F0b3IiLCJnZW9sb2NhdGlvbiIsImdldEN1cnJlbnRQb3NpdGlvbiIsInBvc2l0aW9uIiwicG9zIiwiY29vcmRzIiwibGF0aXR1ZGUiLCJsb25naXR1ZGUiLCJzZXRDZW50ZXIiLCJtYXJrZXIiLCJNYXJrZXIiLCJ0aXRsZSIsIkNvbXBvbmVudCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBTzs7Ozs7Ozs7O0FBRVAsSUFBTSxVQUFOLEFBQWdCO0FBQ2hCLElBQU07VUFBVyxBQUNQLEFBQ1I7U0FGZSxBQUVSLEFBQ1A7V0FIZSxBQUdOLEFBQ1Q7VUFKRixBQUFpQixBQUlQO0FBSk8sQUFDZjs7SUFNSSxBO3dDQUNKOzt3QkFBQSxBQUFZLE9BQU07d0NBQUE7O2tKQUFBLEFBQ1YsQUFDTjs7VUFBQSxBQUFLLE1BQUwsQUFBVyxBQUNYO1VBQUEsQUFBSyxZQUhXLEFBR2hCLEFBQWlCO1dBQ2xCOzs7Ozt3Q0FFbUIsQUFDbEI7VUFBSSxLQUFBLEFBQUssTUFBTCxBQUFXLGtCQUFrQixDQUFDLEtBQWxDLEFBQXVDLFVBQVUsQUFDL0M7YUFBQSxBQUFLLEFBQ047QUFDRDtjQUFBLEFBQVEsSUFBUixBQUFZLEFBQ1o7Y0FBQSxBQUFRLElBQUksS0FBQSxBQUFLLE1BQWpCLEFBQXVCLEFBQ3ZCO2NBQUEsQUFBUSxJQUFJLEtBQUEsQUFBSyxNQUFqQixBQUF1QixBQUN4Qjs7Ozt5Q0FFb0IsQUFDbkI7VUFBSSxLQUFBLEFBQUssTUFBTCxBQUFXLGtCQUFrQixDQUFDLEtBQWxDLEFBQXVDLFVBQVUsQUFDL0M7YUFBQSxBQUFLLEFBQ047QUFDRDtjQUFBLEFBQVEsSUFBUixBQUFZLEFBQ1o7Y0FBQSxBQUFRLElBQUksS0FBQSxBQUFLLE1BQWpCLEFBQXVCLEFBQ3ZCO2NBQUEsQUFBUSxJQUFJLEtBQUEsQUFBSyxNQUFqQixBQUF1QixBQUN4Qjs7Ozs4QkFFUzttQkFDUjs7V0FBQSxBQUFLLFlBQUwsQUFBaUIsQUFDZjtXQUFBLEFBQUssVUFBVSxPQUFBLEFBQU8sT0FBUCxBQUFjLEtBQWxCLEFBQXVCLElBQUksS0FBQSxBQUFLLEtBQWhDLEFBQXFDO2dCQUN0QyxFQUFDLEtBQUQsQUFBTSxXQUFXLEtBRDBCLEFBQzNDLEFBQXNCLEFBQzlCO2NBRkYsQUFBVyxBQUEwQyxBQUU3QyxBQUdSO0FBTHFELEFBQ25ELE9BRFM7O1VBS1AsVUFBSixBQUFjLGFBQWEsQUFDekI7Z0JBQUEsQUFBUSxJQUFSLEFBQVksMkJBQTJCLFVBQXZDLEFBQWlELEFBQ2pEO2tCQUFBLEFBQVUsWUFBVixBQUFzQixtQkFBbUIsVUFBQSxBQUFDLFVBQWEsQUFDckQ7Y0FBTTtpQkFDQyxTQUFBLEFBQVMsT0FESixBQUNXLEFBQ3JCO2lCQUFLLFNBQUEsQUFBUyxPQUZoQixBQUFZLEFBRVcsQUFHdkI7QUFMWSxBQUNWOztpQkFJRixBQUFLLElBQUwsQUFBUyxVQUFULEFBQW1CLEFBRW5COztjQUFNLGFBQWEsT0FBQSxBQUFPLE9BQVAsQUFBYyxLQUFsQixBQUF1QjtzQkFBTyxBQUNqQyxBQUNWO2lCQUFLLE9BRnNDLEFBRWpDLEFBQ1Y7bUJBSEYsQUFBZSxBQUE4QixBQUdwQyxBQUVWO0FBTDhDLEFBQzNDLFdBRGE7QUFSakIsV0FhRyxZQUFNLEFBQ1A7a0JBQUEsQUFBUSxJQUFSLEFBQVksQUFDYjtBQWZELEFBZ0JEO0FBbEJELGFBa0JPLEFBQ0w7QUFDQTtnQkFBQSxBQUFRLElBQVIsQUFBWSxBQUNiO0FBQ0Y7Ozs7NkJBQ00sQUFDUDtBQUNBOzZCQUNFLGNBQUE7O29CQUFBO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEseUNBQ08sS0FBTCxBQUFTLE9BQU0sT0FBZixBQUF1QjtvQkFBdkI7c0JBREYsQUFDRSxBQUNFO0FBREY7V0FDRyxLQUFELEFBQU0sdUJBQU8sY0FBQSxTQUFLLFdBQUwsQUFBZTtvQkFBZjtzQkFBQTtBQUFBO09BQUEsRUFIbkIsQUFDRSxBQUVpQixBQUdwQjs7Ozs7RUEvRHdCLGdCQUFNLEE7O0FBa0VqQztBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFRTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVGO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLEFBR0E7OztrQkFBZSxzQ0FDYixDQUFDLGlEQURZLEFBQ2IsQUFBa0QsVUFEcEQsQUFBZSxBQUVaIiwiZmlsZSI6Ikdvb2dsZU1hcHMuanMiLCJzb3VyY2VSb290IjoiQzovVXNlcnMvbWluZ2svY29kaW5nMS9mdWxsc3RhY2svcHJvamVjdHMvY29kZXItbGFuZHMxIn0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvR29vZ2xlTWFwcy5qcyJdLCJuYW1lcyI6WyJSZWFjdCIsInNjcmlwdExvYWRlciIsImZzIiwicmVxdWlyZSIsImtleXMiLCJKU09OIiwicGFyc2UiLCJyZWFkRmlsZVN5bmMiLCJBUElfS0VZIiwiTUFQU1RZTEUiLCJoZWlnaHQiLCJ3aWR0aCIsInBhZGRpbmciLCJtYXJnaW4iLCJOZXdDb21wb25lbnQiLCJwcm9wcyIsIm1hcCIsInZhcmlhYmxlWCIsImlzU2NyaXB0TG9hZGVkIiwidmFyaWFibGUiLCJsb2FkTWFwIiwiY29uc29sZSIsImxvZyIsImlzU2NyaXB0TG9hZFN1Y2NlZWQiLCJ3aW5kb3ciLCJnb29nbGUiLCJtYXBzIiwiTWFwIiwicmVmcyIsImNlbnRlciIsImxhdCIsImxuZyIsInpvb20iLCJuYXZpZ2F0b3IiLCJnZW9sb2NhdGlvbiIsImdldEN1cnJlbnRQb3NpdGlvbiIsInBvc2l0aW9uIiwicG9zIiwiY29vcmRzIiwibGF0aXR1ZGUiLCJsb25naXR1ZGUiLCJzZXRDZW50ZXIiLCJtYXJrZXIiLCJNYXJrZXIiLCJ0aXRsZSIsInNldE1hcCIsIkNvbXBvbmVudCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBTzs7Ozs7Ozs7QUFDUCxJQUFNLEtBQU4sQUFBVzs7QUFFWCxJQUFNLE9BQU8sS0FBQSxBQUFLLE1BQU0sR0FBQSxBQUFHLGFBQUgsQUFBZ0IsY0FBeEMsQUFBYSxBQUFXLEFBQThCO0FBQ3RELElBQU0sVUFBVSxLQUFoQixBQUFnQixBQUFLO0FBQ3JCLElBQU07VUFBVyxBQUNQLEFBQ1I7U0FGZSxBQUVSLEFBQ1A7V0FIZSxBQUdOLEFBQ1Q7VUFKRixBQUFpQixBQUlQO0FBSk8sQUFDZjs7SSxBQU1JO3dDQUNKOzt3QkFBQSxBQUFZLE9BQU07d0NBQUE7O2tKQUFBLEFBQ1YsQUFDTjs7VUFBQSxBQUFLLE1BQUwsQUFBVyxBQUNYO1VBQUEsQUFBSyxZQUhXLEFBR2hCLEFBQWlCO1dBQ2xCOzs7Ozt3Q0FFbUIsQUFDbEI7VUFBSSxLQUFBLEFBQUssTUFBTCxBQUFXLGtCQUFrQixDQUFDLEtBQWxDLEFBQXVDLFVBQVUsQUFDL0M7YUFBQSxBQUFLLEFBQ1A7QUFDQTtjQUFBLEFBQVEsSUFBUixBQUFZLEFBQ1o7Y0FBQSxBQUFRLElBQUksS0FBQSxBQUFLLE1BQWpCLEFBQXVCLEFBQ3ZCO2NBQUEsQUFBUSxJQUFJLEtBQUEsQUFBSyxNQUFqQixBQUF1QixBQUN4Qjs7Ozt5Q0FFb0IsQUFDbkI7VUFBSSxLQUFBLEFBQUssTUFBTCxBQUFXLGtCQUFrQixDQUFDLEtBQWxDLEFBQXVDLFVBQVUsQUFDaEQ7YUFBQSxBQUFLLEFBQ047QUFDQTtjQUFBLEFBQVEsSUFBUixBQUFZLEFBQ1o7Y0FBQSxBQUFRLElBQUksS0FBQSxBQUFLLE1BQWpCLEFBQXVCLEFBQ3ZCO2NBQUEsQUFBUSxJQUFJLEtBQUEsQUFBSyxNQUFqQixBQUF1QixBQUN4Qjs7Ozs4QkFFUzttQkFDUjs7V0FBQSxBQUFLLFlBQUwsQUFBaUIsQUFDakI7V0FBQSxBQUFLLFVBQVUsT0FBQSxBQUFPLE9BQVAsQUFBYyxLQUFsQixBQUF1QixJQUFJLEtBQUEsQUFBSyxLQUFoQyxBQUFxQztnQkFDdEMsRUFBQyxLQUFELEFBQU0sUUFBUSxLQUQ2QixBQUMzQyxBQUFtQixBQUMzQjtjQUZGLEFBQVcsQUFBMEMsQUFFN0MsQUFHTjtBQUxtRCxBQUNuRCxPQURTOztVQUtMLFVBQUosQUFBYyxhQUFhLEFBQ3pCO2dCQUFBLEFBQVEsSUFBUixBQUFZLDJCQUEyQixVQUF2QyxBQUFpRCxBQUNqRDtrQkFBQSxBQUFVLFlBQVYsQUFBc0IsbUJBQW1CLFVBQUEsQUFBQyxVQUFhLEFBQ3JEO2NBQU07aUJBQ0MsU0FBQSxBQUFTLE9BREosQUFDVyxBQUNyQjtpQkFBSyxTQUFBLEFBQVMsT0FGaEIsQUFBWSxBQUVXLEFBR3ZCO0FBTFksQUFDVjs7aUJBSUYsQUFBSyxJQUFMLEFBQVMsVUFBVCxBQUFtQixBQUVuQjs7Y0FBTSxhQUFhLE9BQUEsQUFBTyxPQUFQLEFBQWMsS0FBbEIsQUFBdUI7c0JBQU8sQUFDakMsQUFDVjtpQkFBSyxPQUZzQyxBQUVqQyxBQUNWO21CQUhGLEFBQWUsQUFBOEIsQUFHcEMsQUFFVjtBQUw4QyxBQUMzQyxXQURhO0FBUmpCLFdBYUcsWUFBTSxBQUNQO2tCQUFBLEFBQVEsSUFBUixBQUFZLEFBQ2Q7Y0FBTTtpQkFBTSxBQUNMLEFBQ0w7aUJBRkYsQUFBWSxBQUVMLEFBRVA7QUFKWSxBQUNWO2NBR0ksYUFBYSxPQUFBLEFBQU8sT0FBUCxBQUFjLEtBQWxCLEFBQXVCO3NCQUFPLEFBQ2pDLEFBQ1Y7aUJBQUssT0FGc0MsQUFFakMsQUFDVjttQkFIRixBQUFlLEFBQThCLEFBR3BDLEFBRVQ7QUFMNkMsQUFDM0MsV0FEYTtrQkFLZixBQUFRLElBQVIsQUFBWSxjQUFaLEFBQTBCLEFBQzFCO2lCQUFBLEFBQU8sT0FBTyxPQUFkLEFBQW1CLEFBQ2xCO0FBMUJELEFBMkJEO0FBN0JELGFBNkJPLEFBQ0w7QUFDQTtnQkFBQSxBQUFRLElBQVIsQUFBWSxBQUNaO1lBQU07ZUFBTSxBQUNMLEFBQ0w7ZUFGRixBQUFZLEFBRUwsQUFFUDtBQUpZLEFBQ1Y7WUFHSSxhQUFhLE9BQUEsQUFBTyxPQUFQLEFBQWMsS0FBbEIsQUFBdUI7b0JBQU8sQUFDakMsQUFDVjtlQUFLLEtBRnNDLEFBRWpDLEFBQ1Y7aUJBSEYsQUFBZSxBQUE4QixBQUdwQyxBQUVUO0FBTDZDLEFBQzNDLFNBRGE7Z0JBS2YsQUFBUSxJQUFSLEFBQVksY0FBWixBQUEwQixBQUMxQjtlQUFBLEFBQU8sT0FBUCxBQUFjLEFBQ2Y7QUFDRjs7Ozs2QkFDTSxBQUNQO0FBQ0E7NkJBQ0UsY0FBQTs7b0JBQUE7c0JBQUEsQUFDRTtBQURGO0FBQUEsT0FBQSx5Q0FDTyxLQUFMLEFBQVMsT0FBTSxPQUFmLEFBQXVCO29CQUF2QjtzQkFERixBQUNFLEFBQ0U7QUFERjtXQUNHLEtBQUQsQUFBTSx1QkFBTyxjQUFBLFNBQUssV0FBTCxBQUFlO29CQUFmO3NCQUFBO0FBQUE7T0FBQSxFQUhuQixBQUNFLEFBRWlCLEFBR3BCOzs7OztFQXJGd0IsZ0JBQU0sQUF3RmpDLEE7O2tCQUFlLHNDQUNiLENBQUMsaURBRFksQUFDYixBQUFrRCxVQURwRCxBQUFlLEFBRVoiLCJmaWxlIjoiR29vZ2xlTWFwcy5qcyIsInNvdXJjZVJvb3QiOiIvaG9tZS91YnVudHUvY29kZXItbGFuZHMxIn0=

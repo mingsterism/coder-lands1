@@ -14,7 +14,7 @@ var _GoogleMaps2 = _interopRequireDefault(_GoogleMaps);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = "C:\\Users\\mingk\\coding1\\fullstack\\projects\\coder-lands1\\pages\\gmaps.js?entry";
+var _jsxFileName = "/home/ubuntu/coder-lands1/pages/gmaps.js?entry";
 
 exports.default = function () {
   console.log("Rendering gmaps.js");
@@ -25,4 +25,4 @@ exports.default = function () {
     }
   });
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzXFxnbWFwcy5qcyJdLCJuYW1lcyI6WyJHb29nbGVNYXBzIiwiY29uc29sZSIsImxvZyJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLEFBQU8sQUFFUDs7Ozs7Ozs7a0JBQWUsWUFBTSxBQUNuQjtVQUFBLEFBQVEsSUFBUixBQUFZLEFBQ1o7eUJBQ0EsQUFBQzs7Z0JBQUQ7a0JBREEsQUFDQSxBQUVEO0FBRkM7QUFBQSxHQUFBO0FBSEYiLCJmaWxlIjoiZ21hcHMuanM/ZW50cnkiLCJzb3VyY2VSb290IjoiQzovVXNlcnMvbWluZ2svY29kaW5nMS9mdWxsc3RhY2svcHJvamVjdHMvY29kZXItbGFuZHMxIn0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2dtYXBzLmpzIl0sIm5hbWVzIjpbIkdvb2dsZU1hcHMiLCJjb25zb2xlIiwibG9nIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUVQOzs7Ozs7OztrQkFBZSxZQUFNLEFBQ25CO1VBQUEsQUFBUSxJQUFSLEFBQVksQUFDWjt5QkFDQSxBQUFDOztnQkFBRDtrQkFEQSxBQUNBLEFBRUQ7QUFGQztBQUFBLEdBQUE7QUFIRiIsImZpbGUiOiJnbWFwcy5qcz9lbnRyeSIsInNvdXJjZVJvb3QiOiIvaG9tZS91YnVudHUvY29kZXItbGFuZHMxIn0=

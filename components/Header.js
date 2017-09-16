@@ -13,6 +13,9 @@ const Header = () => {
       <Link href={{pathname: '/about'}}>
         <a style={linkStyle}> About </a>
       </Link>
+      <Link href={{pathname: '/logout'}}>
+        <a style={linkStyle}> Logout </a>
+      </Link>
     </div>
   )
 }

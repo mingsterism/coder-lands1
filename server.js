@@ -6,6 +6,8 @@ const app = next({ dev })
 const routes = require('./routes/routes.js');
 const handle = app.getRequestHandler()
 const githubLogin = require('./routes/github-login.js')
+const IPADDRESS = '13.229.48.160';
+const PORT = 3000;
 
 app.prepare()
 .then(() => {
@@ -18,8 +20,14 @@ app.prepare()
 
   server.get('/maps/:id', (req, res) => {
     console.log("ID PARAMS ------------", req.params.id);
+    console.log('Request SESSION: >>>>>>', req.session)
     // res.send("maps page")
     app.render(req, res, '/gmaps')
+  })
+
+  server.get('/logout', (req, res) => {
+    console.log("---------", req.session.authStatus)
+    res.send("Logged out")
   })
 
   server.get('/newroute', (req, res, next) => {
@@ -42,9 +50,9 @@ app.prepare()
   })
 
 
-  server.listen(3000, (err) => {
+  server.listen(PORT, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log('> Ready on port ',PORT)
   })
 })
 .catch((ex) => {

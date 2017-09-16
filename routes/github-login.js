@@ -4,10 +4,13 @@ const randomString = require('randomstring')
 const request = require('request');
 
 const githubRouter = express.Router();
+const fs = require('fs')
 
-const CLIENT_ID = "";
-const CLIENT_SECRET = "";
-const REDIRECT_URI = "http://7bd11726.ngrok.io/github-login/callback";
+const keys = JSON.parse(fs.readFileSync('./keys.txt', 'utf8'))
+
+const CLIENT_ID = keys['github_clientKey'];
+const CLIENT_SECRET = keys['github_secretKey'];
+const REDIRECT_URI = "http://13.229.48.160:3000/github-login/callback";
 const GITHUB_AUTH_URL = "https://github.com/login/oauth/access_token";
 const GITHUB_PAYLOAD_URL = "https://api.github.com/user";
 
@@ -67,6 +70,7 @@ const getGithubAccessCode = (req, res, next) => {
         TOKEN = httpResponse.body.split("=")[1]
         TOKEN_FINAL = TOKEN.split("&")[0]
         return request(requestOptions(TOKEN_FINAL), (err, resp, body) => {
+          console.log('body: ', body)
           return body
         })
       }
