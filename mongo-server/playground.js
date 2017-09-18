@@ -1,4 +1,4 @@
-var {insert, findDocuments} = require('./mongo-server/basic-methods.js')
+var {insert, findDocuments} = require('./basic-methods.js')
 
 
 findDocuments('mongodb://localhost:27017/testing3', 'users1')

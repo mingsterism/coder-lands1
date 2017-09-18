@@ -3,20 +3,7 @@ var MongoClient = require('mongodb').MongoClient
 
 const db = require('./mongodb.js')
 
-var findDocuments = (db, callback) => {
-	let database = null;
-  // Get the documents collection
-  var collection = db.collection('documents');
-  // Find some documents
-  collection.find({}).toArray(function(err, docs) {
-    assert.equal(err, null);
-    console.log("Found the following records");
-    console.log(docs)
-    callback(docs);
-  });
-}
-
-var findDocs = (url, colName, dbs=db) => {
+var findDocuments = (url, colName, dbs=db) => {
 	let database = null;
 	dbs.open(url)
 		.then((db) => {
@@ -41,7 +28,7 @@ var findDocs = (url, colName, dbs=db) => {
 		})
 }
 
-const insert = (object, url, colName, dbs=db) => {
+const insertDocument = (object, url, colName, dbs=db) => {
 	let database = null;
 	dbs.open(url)
 		.then((db) => {
@@ -61,6 +48,6 @@ const insert = (object, url, colName, dbs=db) => {
 }
 
 module.exports = {
-	findDocuments: findDocs, 
-	insert: insert, 
+	findDocuments: findDocuments, 
+	insertDocument: insertDocument, 
 }

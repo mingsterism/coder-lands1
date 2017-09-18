@@ -3,6 +3,8 @@ const url = require('url');
 const randomString = require('randomstring')
 const request = require('request');
 
+const {insertDocument} = require('../mongo-server/basic-methods.js')
+
 const githubRouter = express.Router();
 const fs = require('fs')
 
@@ -13,6 +15,7 @@ const CLIENT_SECRET = keys['github_secretKey'];
 const REDIRECT_URI = "http://54.255.247.84:3000/github-login/callback";
 const GITHUB_AUTH_URL = "https://github.com/login/oauth/access_token";
 const GITHUB_PAYLOAD_URL = "https://api.github.com/user";
+
 
 const randString = randomString.generate();
 
@@ -70,7 +73,8 @@ const getGithubAccessCode = (req, res, next) => {
         TOKEN = httpResponse.body.split("=")[1]
         TOKEN_FINAL = TOKEN.split("&")[0]
         return request(requestOptions(TOKEN_FINAL), (err, resp, body) => {
-          console.log('body: ', body)
+          console.log('body type: ', typeof(JSON.parse(body)))
+	  insertDocument(JSON.parse(body), 'mongodb://localhost:27017/github', 'col1')
           return body
         })
       }
