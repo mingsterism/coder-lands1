@@ -20,6 +20,7 @@
     "cryptex": "^1.0.0",
     "express": "^4.15.4",
     "isomorphic-unfetch": "^2.0.0",
+    "mongodb": "^2.2.31",
     "next": "^3.2.1",
     "next-routes": "^1.0.40",
     "randomstring": "^1.1.5",

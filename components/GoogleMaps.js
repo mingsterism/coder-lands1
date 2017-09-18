@@ -98,5 +98,5 @@ class NewComponent extends React.Component {
 }
 
 export default scriptLoader(
-  ['https://maps.googleapis.com/maps/api/js?key=' + API_KEY]
+  ['https://maps.googleapis.com/maps/api/js?key=' + APIKEY]
 ) (NewComponent);

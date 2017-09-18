@@ -6,11 +6,11 @@ const request = require('request');
 const githubRouter = express.Router();
 const fs = require('fs')
 
-const keys = JSON.parse(fs.readFileSync('./keys.txt', 'utf8'))
+const keys = JSON.parse(fs.readFileSync('./routes/keys.txt', 'utf8'))
 
 const CLIENT_ID = keys['github_clientKey'];
 const CLIENT_SECRET = keys['github_secretKey'];
-const REDIRECT_URI = "http://13.229.48.160:3000/github-login/callback";
+const REDIRECT_URI = "http://54.255.247.84:3000/github-login/callback";
 const GITHUB_AUTH_URL = "https://github.com/login/oauth/access_token";
 const GITHUB_PAYLOAD_URL = "https://api.github.com/user";
 
